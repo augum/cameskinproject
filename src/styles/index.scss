@@ -1,0 +1,10 @@
+@import "./settings";
+@import "./components/card";
+@import "./pages/pages";
+@import "./components/sidemenu";
+@import "./components/form";
+@import "./pages/commande";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
