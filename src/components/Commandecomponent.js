@@ -92,6 +92,7 @@ const Commandecomponent = () => {
           </div>
         </div>
         <div className="rightGrid">
+          <h2>Détail de la commande</h2>
           <div>
             <div>
               {lcommande.map((lcom) => (
