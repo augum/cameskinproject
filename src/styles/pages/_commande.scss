@@ -1,3 +1,27 @@
 .container{
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+
+    .leftGrid{
+        
+        
+    }
+  .rightGrid{
+      padding-left: 5px;
+      color:$color1;
+    li{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+
+      h3{
+        font-weight: 200;
+        font-size: medium;
+        font-family: $font1;
+      }
+    }
+    .secondT{
+      width: 60%;
+    }
+  } 
 }

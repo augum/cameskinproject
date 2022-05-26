@@ -5,10 +5,11 @@
  $font1: "font1", sans-serif;
 
  $color1:#1D242E; 
- $color2:rgba(194, 183, 183, 0.498);
+ $color2:rgba(194, 183, 183, 0.397);
  $color3:black;
  $color4:hsla(0, 69%, 46%, 0.413);
  $color5:rgba(26, 111, 26, 0.363);
+ $color6:rgba(231, 224, 224, 0.253);
  
  @mixin button-cart{
     width: 130px;
@@ -20,6 +21,15 @@
     border: 0.5px solid rgb(177,177,177);
     color:$color3;
     cursor: pointer;
+ }
+ @mixin input-button{
+   padding: 10px 0;
+   margin: 10px;
+   background: none;
+   outline: none;
+   border: none;
+   border-bottom: 1px solid $color2;
+   font-size: small;
  }
  * {
     margin: 0;

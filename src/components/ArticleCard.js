@@ -84,7 +84,7 @@ const ArticleCard = () => {
                       <TableCell>
                         <span>
                           <i
-                            class="fa-solid fa-angles-right"
+                            className="fa-solid fa-angles-right"
                             onClick={() => addToCart(row)}
                           ></i>
                         </span>

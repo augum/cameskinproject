@@ -1,0 +1,14 @@
+.validerCommande{
+    padding-left: 5px;
+    form{
+        .lotClass{
+            @include input-button
+        }
+        .qteClass{
+            @include input-button
+        }
+        .valideBtn{
+            @include button-cart
+        }
+    }
+}

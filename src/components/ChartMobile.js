@@ -69,7 +69,7 @@ const ChartMobile = () => {
                 <div className="cart-product">
                   <h3>{cartItem.libelle}</h3>
                   <button onClick={() => handlerRemoveFromCart(cartItem)}>
-                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <i className="fa fa-trash" aria-hidden="true"></i>
                   </button>
                 </div>
                 <div className="cart-product-price">{cartItem.prixVente}</div>
