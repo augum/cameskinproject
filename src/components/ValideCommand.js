@@ -19,22 +19,23 @@ const ValideCommand = ({ mobile, articleSearch }) => {
     }
   }
   return (
-    <div>
+    <div className="validerCommande">
       <form onSubmit={(e) => handlerform(e)}>
-        <select onChange={(e) => setLot(e.target.value)}>
+        <select className="lotClass" onChange={(e) => setLot(e.target.value)}>
           <option value="lot 1">lot 1</option>
           <option value="lot 2">lot 2</option>
           <option value="lot 3">lot 3</option>
           <option value="lot 7">lot 7</option>
         </select>
         <input
+          className="qteClass"
           type="number"
           name=""
           min="1"
           placeholder="Quantité"
           onChange={(e) => setQte(e.target.value)}
         />
-        <input type="submit" value="OK" />
+        <input className="valideBtn" type="submit" value="Valider" />
       </form>
     </div>
   )

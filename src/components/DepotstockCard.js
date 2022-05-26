@@ -1,12 +1,3 @@
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -24,7 +15,7 @@ const DepotstockCard = ({ article }) => {
   useEffect(() => {
     axios
       .get(`http://localhost:8083/api/stockdepotarticleid?id=${search}`)
-      .then((res) => dispatch(getStockdepot(res.data)))
+      .then((res) => console.log(res.data))
   }, [search])
 
   return (
@@ -33,6 +24,7 @@ const DepotstockCard = ({ article }) => {
         className="flex"
         onClick={() => {
           setVisible(!visible)
+          console.log(article.id + ' ***')
           handlerArticle()
         }}
       >

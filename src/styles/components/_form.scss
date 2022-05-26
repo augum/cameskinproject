@@ -3,14 +3,8 @@
     justify-content: space-between;
     
     input{
-        padding: 10px 0;
-        margin: 10px;
-        background: none;
-        outline: none;
-        border: none;
-        border-bottom: 1px solid $color2;
-        font-size: small;
-
+      @include input-button ;
+      align-items: center;
     }
 
 }
