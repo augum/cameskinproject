@@ -10,9 +10,9 @@ import {
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-const DepotStock = ({ open, onClose }) => {
+const DepotStock = ({ onClose }) => {
   const articleLots = useSelector((state) => state.products.stockdepotproducts)
-  if (!open) return null
+
   return (
     <div className="overlay">
       <div className="modalContainer">
