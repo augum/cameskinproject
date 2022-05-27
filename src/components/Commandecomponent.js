@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {
+  Modal,
   Paper,
   Table,
   TableBody,
@@ -8,11 +9,13 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import DepotStock from './DepotStock'
 import ValideCommand from './ValideCommand'
 import { getStockdepot } from '../features/product.slice'
+import { Box } from '@mui/system'
 
 const Commandecomponent = () => {
   const [commande, setCommande] = useState([])
@@ -20,11 +23,25 @@ const Commandecomponent = () => {
 
   const [search, setSearch] = useState()
   const [articleSearch, setArticleSearch] = useState()
-  const [articledatexp, setArticledatexp] = useState()
-  const [open, setOpen] = useState(true)
   const [visible, setVisible] = useState(false)
   const [tableVisible, setTableVisible] = useState(false)
   const [mobile, setMobile] = useState(false)
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '60%',
+    bgcolor: 'white',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  }
+
+  const [open, setOpen] = React.useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
 
   const dispatch = useDispatch()
 
@@ -92,6 +109,7 @@ const Commandecomponent = () => {
           </div>
         </div>
         <div className="rightGrid">
+          <h2>Détail de la commande</h2>
           <div>
             <div>
               {lcommande.map((lcom) => (
@@ -101,10 +119,10 @@ const Commandecomponent = () => {
                     <h3>{lcom.quantity}</h3>
                     <button
                       onClick={() => {
-                        setTableVisible(true)
+                        handleOpen()
                         setVisible(true)
                         setArticleSearch(lcom.article.id)
-                        setArticledatexp(lcom.dateExpiration)
+
                         handlerArticle()
                       }}
                     >
@@ -121,10 +139,18 @@ const Commandecomponent = () => {
             </div>
           </div>
           <div className="secondT">
-            <DepotStock
-              open={tableVisible}
-              onClose={() => setTableVisible(false)}
-            />
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  <DepotStock onClose={() => handleClose()} />
+                </Typography>
+              </Box>
+            </Modal>
           </div>
         </div>
       </div>
