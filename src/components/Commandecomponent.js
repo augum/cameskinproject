@@ -16,6 +16,7 @@ import DepotStock from './DepotStock'
 import ValideCommand from './ValideCommand'
 import { getStockdepot } from '../features/product.slice'
 import { Box } from '@mui/system'
+import ReactPaginate from 'react-paginate'
 
 const Commandecomponent = () => {
   const [commande, setCommande] = useState([])
@@ -60,6 +61,24 @@ const Commandecomponent = () => {
       .get('http://localhost:8083/api/commandefalses')
       .then((res) => setCommande(res.data))
   }, [commande])
+  //pagination
+  const [currentItems, setCurrentItems] = useState([])
+  const [pageCount, setPageCount] = useState(0)
+  const [itemOffset, setItemOffset] = useState(0)
+  const itemsPerPage = 10
+
+  useEffect(() => {
+    const endOffset = itemOffset + itemsPerPage
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`)
+    setCurrentItems(commande.slice(itemOffset, endOffset))
+    setPageCount(Math.ceil(commande.length / itemsPerPage))
+  }, [itemOffset, itemsPerPage, commande])
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % commande.length
+    setItemOffset(newOffset)
+  }
+
+  //fin pagination
   return (
     <div>
       <div className="container">
@@ -79,7 +98,7 @@ const Commandecomponent = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {commande.map((row) => (
+                  {currentItems.map((row) => (
                     <TableRow
                       key={row.name}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -106,6 +125,15 @@ const Commandecomponent = () => {
                 </TableBody>
               </Table>
             </TableContainer>
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel="next >"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={2}
+              pageCount={pageCount}
+              previousLabel="< previous"
+              renderOnZeroPageCount={null}
+            />
           </div>
         </div>
         <div className="rightGrid">
@@ -122,7 +150,7 @@ const Commandecomponent = () => {
                         handleOpen()
                         setVisible(true)
                         setArticleSearch(lcom.article.id)
-
+                        console.log(articleSearch)
                         handlerArticle()
                       }}
                     >
