@@ -4,6 +4,7 @@ import Navigation from '../components/Navigation'
 
 const Mobile = () => {
   const [open, setOpen] = useState(true)
+  const commande = true
   return (
     <div className="flex">
       <div
@@ -24,7 +25,7 @@ const Mobile = () => {
         </div>
       </div>
       <div className="p-7 text-2xl font-semibold flex-1 h-screen">
-        <ArticleCard />
+        <ArticleCard commande={commande} />
       </div>
     </div>
   )

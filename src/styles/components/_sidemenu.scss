@@ -1,0 +1,5 @@
+.sidemenu{
+  .active{
+      @include backgroundPagination; 
+  }
+}

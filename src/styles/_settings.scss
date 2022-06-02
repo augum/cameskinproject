@@ -10,6 +10,9 @@
  $color4:hsla(0, 69%, 46%, 0.413);
  $color5:rgba(26, 111, 26, 0.363);
  $color6:rgba(231, 224, 224, 0.253);
+ $color7: rgba(42, 7, 112, 0.474);
+ $color8: white;
+ $color9: rgb(87, 87, 237);
  
  @mixin button-cart{
     width: 130px;
@@ -30,6 +33,36 @@
    border: none;
    border-bottom: 1px solid $color2;
    font-size: small;
+ }
+ @mixin backgroundPagination{
+  background: $color7;
+  color: $color8;
+ }
+ @mixin paginationStyle{
+  .pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5rem;
+    font-size: 1.2rem;
+    gap: 5px;
+    padding-top: 10px;
+
+    .page-num{
+      padding: 8px 15px;
+      cursor: pointer;
+      border-radius: 3px;
+      font-weight: 400;
+
+      &:hover{
+        @include backgroundPagination;
+        
+      }
+    }
+    .active{
+      @include backgroundPagination;
+    }
+  }
  }
  * {
     margin: 0;

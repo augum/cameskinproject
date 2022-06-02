@@ -6,28 +6,28 @@ const Navigation = () => {
     <div className="sidemenu">
       <ul className="pt-6">
         <NavLink to="/">
-          <li className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white">
-            Home
+          <li className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white ">
+            Articles
           </li>
         </NavLink>
         <NavLink to="/mobile">
-          <li className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white">
+          <li className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white ">
             Mobil command
           </li>
         </NavLink>
         <NavLink to="/depot">
-          <li className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white">
+          <li className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white ">
             Depot
           </li>
         </NavLink>
         <NavLink to="/commande">
-          <li className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white">
+          <li className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white ">
             Commande
           </li>
         </NavLink>
         <NavLink to="/depot">
-          <li className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white">
-            ADministration
+          <li className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white ">
+            Administration
           </li>
         </NavLink>
       </ul>
