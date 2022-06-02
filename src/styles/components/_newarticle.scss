@@ -1,0 +1,16 @@
+.addArticleContainer{
+    form{
+        display: flex;
+        gap: 5px;
+        input{
+            @include input-button ;
+          }
+      button{
+          padding-left: 5px;
+          background: none;
+          border-radius: 2px;
+          border: 1px solid $color1;
+      }     
+    }
+    
+}

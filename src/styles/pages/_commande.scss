@@ -4,7 +4,9 @@
     column-gap: 10px;
 
     .leftGrid{
-        
+        .tableau{
+          @include paginationStyle;
+        }
         
     }
   .rightGrid{

@@ -1,3 +1,5 @@
 .sidemenu{
-  height: 100%;
+  .active{
+      @include backgroundPagination; 
+  }
 }

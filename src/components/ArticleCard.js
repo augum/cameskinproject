@@ -1,4 +1,6 @@
+import { formControlUnstyledClasses } from '@mui/base'
 import {
+  Modal,
   Paper,
   Table,
   TableBody,
@@ -6,18 +8,38 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import ReactPaginate from 'react-paginate'
 import { useDispatch, useSelector } from 'react-redux'
 import { addProductTocart } from '../features/card.slice'
 import { getProductsData } from '../features/product.slice'
 import ChartMobile from './ChartMobile'
+import NewProduct from './NewProduct'
+import { Box } from '@mui/system'
 
-const ArticleCard = () => {
+const ArticleCard = ({ commande }) => {
   const articles = useSelector((state) => state.products.products)
+  console.log(articles)
   const [search, setSearch] = useState(' ')
   const dispatch = useDispatch()
+
+  const [open, setOpen] = React.useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '60%',
+    bgcolor: 'white',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  }
 
   const addToCart = (article) => {
     //setCart([...cart, article])
@@ -37,6 +59,23 @@ const ArticleCard = () => {
       .get(`http://localhost:8083/api/articlesearchs?nom=${search}`)
       .then((res) => dispatch(getProductsData(res.data)))
   }, [articles])
+  //pagination
+  const [currentItems, setCurrentItems] = useState([])
+  const [pageCount, setPageCount] = useState(0)
+  const [itemOffset, setItemOffset] = useState(0)
+  const itemsPerPage = 10
+
+  useEffect(() => {
+    const endOffset = itemOffset + itemsPerPage
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`)
+    setCurrentItems(articles.slice(itemOffset, endOffset))
+    setPageCount(Math.ceil(articles.length / itemsPerPage))
+  }, [itemOffset, itemsPerPage, articles])
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % articles.length
+    setItemOffset(newOffset)
+  }
+  //fin pagination
   return (
     <div>
       <div className="form-container">
@@ -52,9 +91,14 @@ const ArticleCard = () => {
             </span>
           </label>
         </form>
+        {!commande && (
+          <button className="boutonNew" onClick={() => handleOpen()}>
+            Nouveau
+          </button>
+        )}
       </div>
 
-      <div>
+      <div className="paginateContainer">
         {articles && (
           <div className="tableau">
             <TableContainer component={Paper}>
@@ -71,7 +115,7 @@ const ArticleCard = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {articles.map((row) => (
+                  {currentItems.map((row) => (
                     <TableRow
                       key={row.id}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -81,25 +125,67 @@ const ArticleCard = () => {
                       </TableCell>
                       <TableCell>{row.prixAchat}</TableCell>
                       <TableCell>{row.prixVente}</TableCell>
-                      <TableCell>
-                        <span>
-                          <i
-                            className="fa-solid fa-angles-right"
-                            onClick={() => addToCart(row)}
-                          ></i>
-                        </span>
-                      </TableCell>
+                      {commande && (
+                        <TableCell>
+                          <span>
+                            <i
+                              className="fa-solid fa-angles-right"
+                              onClick={() => addToCart(row)}
+                            ></i>
+                          </span>
+                        </TableCell>
+                      )}
+                      {!commande && (
+                        <TableCell>
+                          <span>
+                            <i
+                              class="fa-solid fa-pen-to-square"
+                              onClick={() => addToCart(row)}
+                            ></i>
+                          </span>
+                        </TableCell>
+                      )}
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
             </TableContainer>
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel="next >"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={2}
+              pageCount={pageCount}
+              previousLabel="< previous"
+              renderOnZeroPageCount={null}
+              containerClassName="pagination"
+              pageLinkClassName="page-num"
+              previousLinkClassName="page-num"
+              nextLinkClassName="page-num"
+              activeLinkClassName="active"
+            />
           </div>
         )}
       </div>
-      <div>
-        <ChartMobile />
+      <div className="secondT">
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              <NewProduct onClose={() => handleClose()} />
+            </Typography>
+          </Box>
+        </Modal>
       </div>
+      {commande && (
+        <div>
+          <ChartMobile />
+        </div>
+      )}
     </div>
   )
 }

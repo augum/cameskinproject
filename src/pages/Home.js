@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import ArticleCard from '../components/ArticleCard'
 import Navigation from '../components/Navigation'
 
 const Home = () => {
@@ -22,8 +23,8 @@ const Home = () => {
           <Navigation />
         </div>
       </div>
-      <div className="p-7 text-2xl font-semibold ">
-        <h1>Home is work</h1>
+      <div className="p-7 text-2xl font-semibold flex-1 h-screen">
+        <ArticleCard />
       </div>
     </div>
   )
