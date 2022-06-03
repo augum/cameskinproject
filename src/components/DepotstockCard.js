@@ -9,38 +9,15 @@ const DepotstockCard = ({ article }) => {
   const [search, setSearch] = useState()
   const dispatch = useDispatch()
 
-  const handlerArticle = () => {
-    setSearch(article.id)
-  }
   useEffect(() => {
     axios
-      .get(`http://localhost:8083/api/stockdepotarticleid?id=${search}`)
-      .then((res) => console.log(res.data))
-  }, [search])
+      .get(`http://localhost:8083/api/stockdepotarticleid?id=${article}`)
+      .then((res) => dispatch(getStockdepot(res.data)))
+  }, [article])
 
   return (
     <div className="card">
-      <div
-        className="flex"
-        onClick={() => {
-          setVisible(!visible)
-          console.log(article.id + ' ***')
-          handlerArticle()
-        }}
-      >
-        {article.id}
-        {article.libelle}
-        <img
-          src="./asset/img/ouverture.svg"
-          alt=""
-          className={`relativecursor-pointer rounded-full
-        -right-3 top-9 w-7 border-2 border-dark-purple ${
-          visible && 'rotate-180'
-        }`}
-        />
-      </div>
-
-      {visible && <DepotStock />}
+      <DepotStock />
     </div>
   )
 }
