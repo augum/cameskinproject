@@ -19,16 +19,23 @@ import { getProductsData } from '../features/product.slice'
 import ChartMobile from './ChartMobile'
 import NewProduct from './NewProduct'
 import { Box } from '@mui/system'
+import DepotstockCard from './DepotstockCard'
+import ApproDepot from './ApproDepot'
+import { sassTrue } from 'sass'
 
-const ArticleCard = ({ commande }) => {
+const ArticleCard = ({ commande, depot, home }) => {
   const articles = useSelector((state) => state.products.products)
-  console.log(articles)
+
   const [search, setSearch] = useState(' ')
+  const [idarticle, setIdarticle] = useState()
+  const [depotstock, setDepotstock] = useState(false)
+  const [approdepot, setApprodepot] = useState(false)
   const dispatch = useDispatch()
 
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+
   const style = {
     position: 'absolute',
     top: '50%',
@@ -53,13 +60,26 @@ const ArticleCard = ({ commande }) => {
 
     dispatch(addProductTocart(data))
   }
-
+  const handlerdepot = (article) => {
+    setIdarticle(article.id)
+    setDepotstock(true)
+    setApprodepot(false)
+  }
+  const handlerapprodepot = (article) => {
+    setIdarticle(article.id)
+    setDepotstock(false)
+    setApprodepot(sassTrue)
+  }
+  const handlerfermerdepot = () => {
+    setDepotstock(false)
+    setApprodepot(false)
+  }
   useEffect(() => {
     axios
       .get(`http://localhost:8083/api/articlesearchs?nom=${search}`)
       .then((res) => dispatch(getProductsData(res.data)))
   }, [articles])
-  //pagination
+  //pagination fff
   const [currentItems, setCurrentItems] = useState([])
   const [pageCount, setPageCount] = useState(0)
   const [itemOffset, setItemOffset] = useState(0)
@@ -91,7 +111,7 @@ const ArticleCard = ({ commande }) => {
             </span>
           </label>
         </form>
-        {!commande && (
+        {home && (
           <button className="boutonNew" onClick={() => handleOpen()}>
             Nouveau
           </button>
@@ -135,12 +155,32 @@ const ArticleCard = ({ commande }) => {
                           </span>
                         </TableCell>
                       )}
-                      {!commande && (
+                      {home && (
                         <TableCell>
                           <span>
                             <i
-                              class="fa-solid fa-pen-to-square"
+                              className="fa-solid fa-pen-to-square"
                               onClick={() => addToCart(row)}
+                            ></i>
+                          </span>
+                        </TableCell>
+                      )}
+                      {depot && (
+                        <TableCell>
+                          <span>
+                            <i
+                              className="fa-solid fa-eye"
+                              onClick={() => handlerdepot(row)}
+                            ></i>
+                          </span>
+                        </TableCell>
+                      )}
+                      {depot && (
+                        <TableCell>
+                          <span>
+                            <i
+                              className="fa-solid fa-plus"
+                              onClick={() => handlerapprodepot(row)}
                             ></i>
                           </span>
                         </TableCell>
@@ -181,9 +221,26 @@ const ArticleCard = ({ commande }) => {
           </Box>
         </Modal>
       </div>
+
       {commande && (
         <div>
           <ChartMobile />
+        </div>
+      )}
+      {depotstock && (
+        <div className="stockdepot">
+          <button className="boutonNew" onClick={() => handlerfermerdepot()}>
+            Fermer
+          </button>
+          <DepotstockCard article={idarticle} />
+        </div>
+      )}
+      {approdepot && (
+        <div className="stockdepot">
+          <button className="boutonNew" onClick={() => handlerfermerdepot()}>
+            Fermer
+          </button>
+          <ApproDepot article={idarticle} />
         </div>
       )}
     </div>

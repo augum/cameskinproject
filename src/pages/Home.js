@@ -3,6 +3,7 @@ import ArticleCard from '../components/ArticleCard'
 import Navigation from '../components/Navigation'
 
 const Home = () => {
+  const home = true
   const [open, setOpen] = useState(true)
   return (
     <div className="flex">
@@ -24,7 +25,7 @@ const Home = () => {
         </div>
       </div>
       <div className="p-7 text-2xl font-semibold flex-1 h-screen">
-        <ArticleCard />
+        <ArticleCard home={home} />
       </div>
     </div>
   )

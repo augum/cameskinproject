@@ -6,17 +6,7 @@
       @include input-button ;
       align-items: center;
     }
-    .boutonNew{
-      float: right;
-      border: 1px solid;
-      border-radius: 5px;
-      background: $color9;
-      color: $color8;
-      &:hover{
-            background: $color9;
-            background: $color7; 
-        }
-      }
+    @include btnleft
    
 
 }
@@ -25,4 +15,7 @@
       @include paginationStyle;
   }
 
+  }
+  .stockdepot{
+    @include btnleft
   }
