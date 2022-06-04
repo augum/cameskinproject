@@ -29,6 +29,7 @@ const ArticleCard = ({ commande, depot, home }) => {
   const [idarticle, setIdarticle] = useState()
   const [depotstock, setDepotstock] = useState(false)
   const [approdepot, setApprodepot] = useState(false)
+  const [appro, setAppro] = useState(false)
   const dispatch = useDispatch()
 
   const [open, setOpen] = useState(false)
@@ -65,9 +66,10 @@ const ArticleCard = ({ commande, depot, home }) => {
     setApprodepot(false)
   }
   const handlerapprodepot = (article) => {
-    setIdarticle(article.id)
+    setIdarticle(article)
     setDepotstock(false)
     setApprodepot(true)
+    setAppro(true)
   }
   const handlerfermerdepot = () => {
     setDepotstock(false)
@@ -239,7 +241,7 @@ const ArticleCard = ({ commande, depot, home }) => {
           <button className="boutonNew" onClick={() => handlerfermerdepot()}>
             Fermer
           </button>
-          <ApproDepot article={idarticle} />
+          <ApproDepot article={idarticle} appro={appro} />
         </div>
       )}
     </div>
