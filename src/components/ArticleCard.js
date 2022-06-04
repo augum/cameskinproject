@@ -21,7 +21,6 @@ import NewProduct from './NewProduct'
 import { Box } from '@mui/system'
 import DepotstockCard from './DepotstockCard'
 import ApproDepot from './ApproDepot'
-import { sassTrue } from 'sass'
 
 const ArticleCard = ({ commande, depot, home }) => {
   const articles = useSelector((state) => state.products.products)
@@ -68,7 +67,7 @@ const ArticleCard = ({ commande, depot, home }) => {
   const handlerapprodepot = (article) => {
     setIdarticle(article.id)
     setDepotstock(false)
-    setApprodepot(sassTrue)
+    setApprodepot(true)
   }
   const handlerfermerdepot = () => {
     setDepotstock(false)

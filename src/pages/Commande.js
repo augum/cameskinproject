@@ -18,6 +18,7 @@ const Commande = () => {
           !open && 'rotate-180'
         }`}
           onClick={() => setOpen(!open)}
+          alt="ouverture"
         />
         <div className={`${!open && 'hidden'} origin-left duration-200`}>
           <Navigation />

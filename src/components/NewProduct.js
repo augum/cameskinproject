@@ -8,7 +8,7 @@ const NewProduct = ({ onClose }) => {
 
   const handlePoost = async (e) => {
     e.preventDefault()
-    if (libelle != '') {
+    if (libelle !== '') {
       const data = {
         libelle,
         prixAchat,
