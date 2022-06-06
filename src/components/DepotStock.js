@@ -69,12 +69,6 @@ const DepotStock = () => {
                           </TableCell>
                           <TableCell>{row.qte}</TableCell>
                           <TableCell>{row.dateExpiration}</TableCell>
-                          <TableCell>
-                            <i
-                              class="fa-solid fa-plus"
-                              onClick={() => handleraddstockdepot(row)}
-                            ></i>
-                          </TableCell>
                         </TableRow>
                       ))}
                     </TableBody>

@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify'
 import Commande from './pages/Commande'
 import Depot from './pages/Depot'
 import Home from './pages/Home'
+import Livraison from './pages/Livraison'
 import Mobile from './pages/Mobile'
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/mobile" element={<Mobile />} />
+        <Route path="/livraison" element={<Livraison />} />
         <Route path="/depot" element={<Depot />} />
         <Route path="/commande" element={<Commande />} />
       </Routes>
