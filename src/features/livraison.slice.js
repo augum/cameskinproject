@@ -1,21 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  productsItem: localStorage.getItem('items')
-    ? JSON.parse(localStorage.getItem('items'))
+  productsItem: localStorage.getItem('livraison')
+    ? JSON.parse(localStorage.getItem('livraison'))
     : [],
   quantity: 0,
   total: 0,
   commandes: [],
 }
 
-export const cartSlice = createSlice({
-  name: 'cart',
+export const livraisonSlice = createSlice({
+  name: 'cartliv',
   initialState,
 
   reducers: {
-    /**ajouter dans la commande */
-    addProductTocart: (state, { payload }) => {
+    /**Ajouter le produit dans le pannier de la livraison */
+    addProductTocartLivarison: (state, { payload }) => {
       const itemindex = state.productsItem.findIndex(
         (item) => item.articleId === payload.articleId,
       )
@@ -25,7 +25,7 @@ export const cartSlice = createSlice({
         const cartTemplate = { ...payload, quantity: 1 }
         state.productsItem.push(cartTemplate)
       }
-      localStorage.setItem('items', JSON.stringify(state.productsItem))
+      localStorage.setItem('livraison', JSON.stringify(state.productsItem))
     },
     /**cette methode permet d'enlever le produit dans la commande */
     removeFromCart(state, { payload }) {
@@ -33,7 +33,7 @@ export const cartSlice = createSlice({
         (item) => item.articleId !== payload.articleId,
       )
       state.productsItem = nextCartItems
-      localStorage.setItem('items', JSON.stringify(state.productsItem))
+      localStorage.setItem('livraison', JSON.stringify(state.productsItem))
     },
     /**incrementer ou decrementrer la quantité */
     decreaseCart(state, { payload }) {
@@ -48,13 +48,13 @@ export const cartSlice = createSlice({
           (item) => item.articleId !== payload.articleId,
         )
         state.productsItem = nextCartItems
-        localStorage.setItem('items', JSON.stringify(state.productsItem))
+        localStorage.setItem('livraison', JSON.stringify(state.productsItem))
       }
     },
     /**vider la commande */
     clearCart(state, { payload }) {
       state.productsItem = []
-      localStorage.setItem('items', JSON.stringify(state.productsItem))
+      localStorage.setItem('livraison', JSON.stringify(state.productsItem))
     },
     /** calculer le total */
     getTotal(state, { payload }) {
@@ -78,7 +78,7 @@ export const cartSlice = createSlice({
       state.total = total
     },
     /** Commande on state */
-    addCommande: (state, { payload }) => {
+    addCommandeLiv: (state, { payload }) => {
       console.log(payload)
       state.commandes.push(payload)
     },
@@ -90,7 +90,7 @@ export const {
   decreaseCart,
   clearCart,
   getTotal,
-  addCommande,
+  addCommandeLiv,
   addProductTocartLivarison,
-} = cartSlice.actions
-export default cartSlice.reducer
+} = livraisonSlice.actions
+export default livraisonSlice.reducer

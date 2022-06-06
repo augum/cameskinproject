@@ -1,4 +1,3 @@
-import { formControlUnstyledClasses } from '@mui/base'
 import {
   Modal,
   Paper,
@@ -21,8 +20,10 @@ import NewProduct from './NewProduct'
 import { Box } from '@mui/system'
 import DepotstockCard from './DepotstockCard'
 import ApproDepot from './ApproDepot'
+import { addProductTocartLivarison } from '../features/livraison.slice'
+import CharLivraison from './CharLivraison'
 
-const ArticleCard = ({ commande, depot, home }) => {
+const ArticleCard = ({ commande, depot, home, livraison }) => {
   const articles = useSelector((state) => state.products.products)
 
   const [search, setSearch] = useState(' ')
@@ -59,6 +60,15 @@ const ArticleCard = ({ commande, depot, home }) => {
     }
 
     dispatch(addProductTocart(data))
+  }
+  const addToCartLivraison = (article) => {
+    const data = {
+      articleId: article.id,
+      libelle: article.libelle,
+      prixAchat: article.prixAchat,
+      prixVente: article.prixVente,
+    }
+    dispatch(addProductTocartLivarison(data))
   }
   const handlerdepot = (article) => {
     setIdarticle(article.id)
@@ -156,6 +166,16 @@ const ArticleCard = ({ commande, depot, home }) => {
                           </span>
                         </TableCell>
                       )}
+                      {livraison && (
+                        <TableCell>
+                          <span>
+                            <i
+                              className="fa-solid fa-angles-right"
+                              onClick={() => addToCartLivraison(row)}
+                            ></i>
+                          </span>
+                        </TableCell>
+                      )}
                       {home && (
                         <TableCell>
                           <span>
@@ -226,6 +246,11 @@ const ArticleCard = ({ commande, depot, home }) => {
       {commande && (
         <div>
           <ChartMobile />
+        </div>
+      )}
+      {livraison && (
+        <div>
+          <CharLivraison />
         </div>
       )}
       {depotstock && (
