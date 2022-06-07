@@ -244,7 +244,7 @@ const ArticleCard = ({ commande, depot, home, livraison }) => {
       </div>
 
       {commande && (
-        <div>
+        <div className="col-lg-8 connectedSortable">
           <ChartMobile />
         </div>
       )}
