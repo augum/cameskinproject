@@ -15,7 +15,7 @@ const Navigation = () => {
             Mobil command
           </li>
         </NavLink>
-        <NavLink to="/livraison">
+        <NavLink to="/mobile">
           <li className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white ">
             Mobil livraison
           </li>
