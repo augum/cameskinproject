@@ -87,7 +87,7 @@ export default class Menu extends Component {
                     </NavLink>
                     <NavLink to="/commande">
                       <li className="nav-item">
-                        <p>Bon de commande</p>
+                        <p>Liste de commande</p>
                       </li>
                     </NavLink>
                   </ul>
