@@ -85,6 +85,11 @@ export default class Menu extends Component {
                         <p>Détail stock</p>
                       </li>
                     </NavLink>
+                    <NavLink to="/commande">
+                      <li className="nav-item">
+                        <p>Bon de commande</p>
+                      </li>
+                    </NavLink>
                   </ul>
                 </li>
                 <li className="nav-item has-treeview">
