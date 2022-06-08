@@ -1,16 +1,18 @@
 .addArticleContainer{
     form{
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr;
         gap: 5px;
         input{
             @include input-button ;
+            width:50%
           }
       button{
           padding-left: 5px;
           background: none;
           border-radius: 2px;
           border: 1px solid $color1;
+          width: 25%;
       }     
     }
-    
 }

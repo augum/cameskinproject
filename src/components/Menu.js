@@ -8,12 +8,13 @@ export default class Menu extends Component {
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
           {/* Brand Logo */}
           <a href="#" className="brand-link">
-            <img
-              src="dist/img/AdminLTELogo.png"
-              alt="AdminLTE Logo"
-              className="brand-image img-circle elevation-3"
-              style={{ opacity: '.8' }}
-            />
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <a className="nav-link" data-widget="pushmenu" href="#">
+                  <i className="fa-brands fa-mixer"></i>
+                </a>
+              </li>
+            </ul>
             <span className="brand-text font-weight-light">Scommercial</span>
           </a>
           {/* Sidebar */}
@@ -83,6 +84,11 @@ export default class Menu extends Component {
                     <NavLink to="/depot">
                       <li className="nav-item">
                         <p>Détail stock</p>
+                      </li>
+                    </NavLink>
+                    <NavLink to="/commande">
+                      <li className="nav-item">
+                        <p>Liste de commande</p>
                       </li>
                     </NavLink>
                   </ul>
