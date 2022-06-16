@@ -1,5 +1,8 @@
+import { Modal, Typography } from '@mui/material'
+import { Box } from '@mui/system'
 import axios from 'axios'
-import React, { useEffect } from 'react'
+
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   addCommandeLiv,
@@ -9,10 +12,26 @@ import {
   getTotal,
   removeFromCart,
 } from '../features/livraison.slice'
+import Facture from './Facture'
 
 const CharLivraison = () => {
   const cart = useSelector((state) => state.livraisons)
   const dispatch = useDispatch()
+  const [client, setClient] = useState('Inconnu')
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '60%',
+    bgcolor: 'white',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  }
 
   useEffect(() => {
     dispatch(getTotal())
@@ -36,7 +55,7 @@ const CharLivraison = () => {
 
     const data = {
       user_id: 2,
-      nomClient: 'makuma',
+      nomClient: client,
       id_user: 1,
       totalAmount: cart.total,
       lfactureMobiles: cart.productsItem,
@@ -45,25 +64,35 @@ const CharLivraison = () => {
     axios.post('http://localhost:8083/api/facturesmobiles', data).then(() => {
       dispatch(addCommandeLiv(data))
     })
-
     handlerClearCart()
+    handleOpen()
   }
   return (
     <div className="cart-container">
       <h2>Commande des produits</h2>
+
       {cart.productsItem.length === 0 ? (
         <div className="cart-empty">
           <p> Il ya pas de commande</p>
         </div>
       ) : (
         <div>
+          <select
+            className="lotClass"
+            onChange={(e) => setClient(e.target.value)}
+          >
+            <option value="Hopital saint Joseph">Hopital saint Joseph</option>
+            <option value="CH Monkole">CH Monkole</option>
+            <option value="Hopital Roi Beaudouin">Hopital Roi Beaudouin</option>
+          </select>
           <div className="titles">
             <h3 className="product-title">Article</h3>
             <h3 className="pice">Prix</h3>
             <h3 className="quantity">Qte</h3>
             <h3 className="total">Total</h3>
           </div>
-          <div className="cart-items">
+
+          <div className="cart-items" id="content">
             {cart.productsItem?.map((cartItem) => (
               <div className="cart-item" key={cartItem.articleId}>
                 <div className="cart-product">
@@ -109,6 +138,20 @@ const CharLivraison = () => {
           </div>
         </div>
       )}
+      <div className="secondT">
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              <Facture onClose={() => handleClose()} />
+            </Typography>
+          </Box>
+        </Modal>
+      </div>
     </div>
   )
 }

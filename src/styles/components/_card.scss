@@ -89,6 +89,11 @@
          background: $color4;
      }
    }
+   .cart-empty{
+    margin-left: auto;
+    margin-right: auto;
+    width: 6em
+   }
 }
 
 .cart-item, .titles{
@@ -96,4 +101,29 @@
     align-items: center;
     grid-template-columns: 3fr 1fr 1fr 1fr;
     column-gap: 0.5rem;
+}
+
+.facture{
+    width: 100%;
+    .entete{
+        display: grid;
+        grid-template-columns:  1fr 1fr;
+        column-gap: 0.5rem;
+    }
+    .titre{
+        h2{
+            text-align: center;
+        }
+    }
+    .info{
+        display: grid;
+        grid-template-columns:  1fr 1fr;
+        column-gap: 0.5rem;
+    }
+    .foot{
+        display: grid;
+        grid-template-columns:  1fr 1fr;
+        column-gap: 0.5rem;
+    }
+
 }

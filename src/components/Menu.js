@@ -23,14 +23,14 @@ export default class Menu extends Component {
             <div className="user-panel mt-3 pb-3 mb-3 d-flex">
               <div className="image">
                 <img
-                  src="dist/img/user2-160x160.jpg"
+                  src="dist/img/c3.png"
                   className="img-circle elevation-2"
                   alt="User Image"
                 />
               </div>
               <div className="info">
                 <a href="#" className="d-block">
-                  Alexander Pierce
+                  CAMESKIN
                 </a>
               </div>
             </div>

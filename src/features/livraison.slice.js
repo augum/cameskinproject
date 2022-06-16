@@ -54,6 +54,7 @@ export const livraisonSlice = createSlice({
     /**vider la commande */
     clearCart(state, { payload }) {
       state.productsItem = []
+
       localStorage.setItem('livraison', JSON.stringify(state.productsItem))
     },
     /** calculer le total */
@@ -80,6 +81,7 @@ export const livraisonSlice = createSlice({
     /** Commande on state */
     addCommandeLiv: (state, { payload }) => {
       console.log(payload)
+      state.commandes = []
       state.commandes.push(payload)
     },
   },
