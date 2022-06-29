@@ -138,7 +138,7 @@ const CharLivraison = () => {
           </div>
         </div>
       )}
-      <div className="secondT">
+      <div>
         <Modal
           open={open}
           onClose={handleClose}

@@ -1,0 +1,60 @@
+.page{
+  background: $color8 ;  
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 5px;
+
+  .bb{
+    border-bottom:  3px solid $color1 ;
+  }
+  .top-content{
+    padding-bottom: 15px ;
+
+    .logo img{
+        height: 60px;
+    }
+    .top-left{
+        margin: 0;
+
+        .graphic-path{
+           height: 40px ; 
+           position: relative;
+        }
+
+        .graphic-path::before{
+            content: "";
+            height: 20px;
+            background: $color1;
+            position: absolute;
+            left: 15px;
+            right: 0;
+            top: -15px;
+            z-index: 2;
+        }
+        .graphic-path::after{
+            content: "";
+            height: 22px;
+            width: 17px;
+            background:$color3 ;
+            position:absolute;
+            top: -13px;
+            left: 6px;
+            transform: rotate(45deg);
+        }
+        .graphic-path p{
+           color: $color8; 
+           height: 40px;
+           left: 0;
+           right:0;
+           text-transform: uppercase;
+           background: $color9 ;
+           font: 26px;
+           z-index: 3;
+           position: absolute;
+           padding-left: 10px;
+        }
+    }
+  }
+}
+

@@ -6,6 +6,7 @@ import Depot from './pages/Depot'
 import Home from './pages/Home'
 import Livraison from './pages/Livraison'
 import Mobile from './pages/Mobile'
+import User from './pages/User'
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/livraison" element={<Livraison />} />
         <Route path="/depot" element={<Depot />} />
         <Route path="/commande" element={<Commande />} />
+        <Route path="/user" element={<User />} />
       </Routes>
     </BrowserRouter>
   )

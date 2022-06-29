@@ -108,6 +108,13 @@ export default class Menu extends Component {
                       </li>
                     </NavLink>
                   </ul>
+                  <ul className="nav nav-treeview">
+                    <NavLink to="/user">
+                      <li className="nav-item">
+                        <p>Création d'utilisateurs</p>
+                      </li>
+                    </NavLink>
+                  </ul>
                 </li>
               </ul>
             </nav>
