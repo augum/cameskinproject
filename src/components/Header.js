@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { useSelector } from 'react-redux'
 
-export default class Header extends Component {
-  render() {
-    return (
+const Header = () => {
+  const users = useSelector((state) => state.connect.users)
+  return (
+    <div>
       <div>
         <nav className="main-header navbar navbar-expand navbar-white navbar-light">
           {/* Left navbar links */}
@@ -18,13 +20,17 @@ export default class Header extends Component {
             <div className="input-group input-group-sm"></div>
           </form>
           {/* Right navbar links */}
-          <ul className="navbar-nav ml-auto">
-            {/* Messages Dropdown Menu */}
-
-            {/* Notifications Dropdown Menu */}
-          </ul>
+          {users.map((user, index) => (
+            <ul className="navbar-nav ml-auto">
+              {/* Messages Dropdown Menu */}
+              <li key={index}>{user.nom}</li>
+              {/* Notifications Dropdown Menu */}
+            </ul>
+          ))}
         </nav>
       </div>
-    )
-  }
+    </div>
+  )
 }
+
+export default Header
