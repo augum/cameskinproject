@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   Box,
   Modal,
@@ -14,13 +14,22 @@ import {
 } from '@mui/material'
 import ReactPaginate from 'react-paginate'
 import NewUser from './NewUser'
+import axios from 'axios'
+import { getUsersData } from '../features/user.slice'
 
 const UserCard = () => {
-  const articles = useSelector((state) => state.products.products)
+  const articles = useSelector((state) => state.users.users)
   const [search, setSearch] = useState(' ')
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8083/api/users`)
+      .then((res) => dispatch(getUsersData(res.data)))
+  }, [articles])
 
   //pagination fff
   const [currentItems, setCurrentItems] = useState([])
@@ -49,6 +58,10 @@ const UserCard = () => {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
+  }
+
+  const edditUser = (user) => {
+    console.table(user)
   }
   return (
     <div>
@@ -82,9 +95,9 @@ const UserCard = () => {
               >
                 <TableHead>
                   <TableRow>
-                    <TableCell>Produit</TableCell>
-                    <TableCell>Prix achat</TableCell>
-                    <TableCell>Prix de vente</TableCell>
+                    <TableCell>Pseudo</TableCell>
+                    <TableCell>Nom</TableCell>
+                    <TableCell>Prénom</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -94,10 +107,18 @@ const UserCard = () => {
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                       <TableCell component="th" scope="row">
-                        {row.libelle}
+                        {row.pseudo}
                       </TableCell>
-                      <TableCell>{row.prixAchat}</TableCell>
-                      <TableCell>{row.prixVente}</TableCell>
+                      <TableCell>{row.nom}</TableCell>
+                      <TableCell>{row.prenom}</TableCell>
+                      <TableCell>
+                        <span>
+                          <i
+                            className="fa-solid fa-pen-to-square"
+                            onClick={() => edditUser(row)}
+                          ></i>
+                        </span>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

@@ -102,7 +102,7 @@ export default class Menu extends Component {
                     </p>
                   </a>
                   <ul className="nav nav-treeview">
-                    <NavLink to="/">
+                    <NavLink to="/home">
                       <li className="nav-item">
                         <p>Gestion produit</p>
                       </li>
